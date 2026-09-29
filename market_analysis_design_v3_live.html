@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="ja">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>LIVE TEST</title>
-
+<title>LIVE接続テスト</title>
 <style>
-
-body{background:#07111f;color:white;font-family:sans-serif;text-align:center;padding:40px}
-
-.box{padding:30px;border:2px solid #39a9ff;border-radius:20px}
-
-#price{font-size:50px;font-weight:bold;margin:25px}
-
-#change{font-size:25px}
-
+body{font-family:Arial,sans-serif;background:#eaf6ff;color:#10204d;padding:20px}
+h1{color:#0757b5}
+.card{background:white;border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px #ccd}
+.price{font-size:28px;font-weight:bold}
+.up{color:red}.down{color:blue}
 </style>
-
 </head>
-
 <body>
 
-<div class="box">
+<h1>📊 LIVE MARKET TEST</h1>
+<p>5銘柄を15秒ごとに更新</p>
 
-<h1>🛢️ 原油 Brent</h1>
-
-<div id="price">取得中…</div>
-
-<div id="change">--</div>
-
-<p id="status">接続中…</p>
-
-</div>
+<div class="card">🛢️ Brent<br><span class="price" id="UKOIL">取得中...</span></div>
+<div class="card">🪙 Gold<br><span class="price" id="XAUUSD">取得中...</span></div>
+<div class="card">💲 DXY<br><span class="price" id="DXY">取得中...</span></div>
+<div class="card">🇯🇵 日経225<br><span class="price" id="JP225">取得中...</span></div>
+<div class="card">🇺🇸 S&P500<br><span class="price" id="US500">取得中...</span></div>
 
 <script>
+const symbols=["UKOIL","XAUUSD","DXY","JP225","US500"];
 
-async function test(){
+async function get(s){
+ try{
+  const r=await fetch("https://biquote.io/api/"+s+"?allowStale=true");
+  const d=await r.json();
+  const p=d.mid??d.price??d.lastPrice??d.last;
+  const ch=d.dayDiffPercent??d.changePercent;
+  document.getElementById(s).innerHTML=
+   p==null?"取得失敗":p+"　"+(ch>=0?"▲ ":"▼ ")+Number(ch).toFixed(2)+"%";
+ }catch(e){
+  document.getElementById(s).textContent="接続失敗";
+ }
+}
 
-try{
+function update(){
+ symbols.forEach(get);
+}
+update();
+setInterval(update,15000);
+</script>
 
-const r=await fetch("http
+</body>
+</html>
