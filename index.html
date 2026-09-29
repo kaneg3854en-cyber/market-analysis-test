@@ -1,20 +1,616 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="ja">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>テスト</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>マーケット分析</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{
+
+  margin:0;
+
+  background:#f5f8fc;
+
+  color:#172033;
+
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Arial,sans-serif;
+
+}
+
+.wrap{max-width:900px;margin:auto;padding:18px}
+
+header{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  margin-bottom:14px;
+
+  box-shadow:0 3px 14px #dbe3ee;
+
+}
+
+.title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+.logo{
+
+  width:30px;height:30px;
+
+  border-radius:8px;
+
+  background:#e8f1ff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:#2463c5;
+
+  font-size:19px;
+
+  font-weight:bold;
+
+}
+
+h1{font-size:27px;margin:0}
+
+.sub{color:#718096;margin-top:5px;font-size:13px}
+
+.top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:15px;
+
+  padding-top:13px;
+
+  border-top:1px solid #e3e9f2;
+
+}
+
+.date{font-size:13px;color:#718096}
+
+.conclusion{
+
+  color:#1769aa;
+
+  font-weight:bold;
+
+}
+
+section{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  margin-bottom:14px;
+
+  box-shadow:0 3px 14px #dbe3ee;
+
+}
+
+.sec-title{
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  margin-bottom:14px;
+
+}
+
+.flow{
+
+  font-size:15px;
+
+  line-height:1.8;
+
+}
+
+.flow strong{color:#2463c5}
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:10px;
+
+}
+
+.card{
+
+  border:1px solid #dce5f0;
+
+  border-radius:14px;
+
+  padding:14px;
+
+  min-height:100px;
+
+}
+
+.name{
+
+  font-size:13px;
+
+  color:#718096;
+
+}
+
+.price{
+
+  font-size:22px;
+
+  font-weight:bold;
+
+  margin-top:7px;
+
+}
+
+.change{
+
+  font-size:13px;
+
+  margin-top:4px;
+
+}
+
+.up{color:#149447}
+
+.down{color:#d34a4a}
+
+.neutral{color:#718096}
+
+.news{
+
+  border-bottom:1px solid #e5ebf2;
+
+  padding:11px 0;
+
+}
+
+.news:last-child{border-bottom:0}
+
+.news a{
+
+  color:#245fae;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+}
+
+.time{
+
+  font-size:11px;
+
+  color:#8a96a8;
+
+  margin-top:4px;
+
+}
+
+.currency{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+}
+
+.fx{
+
+  border:1px solid #e0e7f0;
+
+  border-radius:12px;
+
+  padding:12px;
+
+}
+
+.fx b{font-size:14px}
+
+.signal{
+
+  margin-top:5px;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+}
+
+.scenario{
+
+  border-left:4px solid #3975d3;
+
+  background:#f4f8ff;
+
+  padding:13px;
+
+  border-radius:9px;
+
+  margin-bottom:10px;
+
+}
+
+.scenario:last-child{margin-bottom:0}
+
+.small{font-size:12px;color:#7a8798}
+
+.update{
+
+  text-align:right;
+
+  font-size:11px;
+
+  color:#8995a5;
+
+  margin-top:12px;
+
+}
+
+@media(min-width:700px){
+
+  .cards{grid-template-columns:repeat(3,1fr)}
+
+  .currency{grid-template-columns:repeat(4,1fr)}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<h1>マーケット分析テスト</h1>
+<div class="wrap">
 
-<p>GitHub Pages 接続確認OK 👍🏻</p>
+<header>
+
+  <div class="title">
+
+    <div class="logo">⌁</div>
+
+    <div>
+
+      <h1>マーケット分析</h1>
+
+      <div class="sub">世界の市場をファンダメンタルズから確認</div>
+
+    </div>
+
+  </div>
+
+  <div class="top">
+
+    <div class="date" id="date">更新中…</div>
+
+    <div class="conclusion">今日の結論</div>
+
+  </div>
+
+</header>
+
+<section>
+
+  <div class="sec-title">① 現在の流れ（因果関係）</div>
+
+  <div class="flow">
+
+    <strong>米国金利</strong> → ドル → 金・原油 → 株式市場<br>
+
+    <strong>世界景気</strong> → リスク選好 → 新興国通貨<br>
+
+    <strong>日本金利</strong> → 円相場 → USD/JPY
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="sec-title">② 主要資産の現在地と方向性</div>
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="name">BRENT原油</div>
+
+      <div class="price" id="brent">--</div>
+
+      <div class="change" id="brentC">取得中…</div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="name">GOLD</div>
+
+      <div class="price" id="gold">--</div>
+
+      <div class="change" id="goldC">取得中…</div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="name">米10年債</div>
+
+      <div class="price">--</div>
+
+      <div class="change neutral">リアルタイム確認中</div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="name">DXY</div>
+
+      <div class="price" id="dxy">--</div>
+
+      <div class="change" id="dxyC">取得中…</div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="name">日経225</div>
+
+      <div class="price" id="nikkei">--</div>
+
+      <div class="change" id="nikkeiC">取得中…</div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="name">S&P500</div>
+
+      <div class="price" id="sp500">--</div>
+
+      <div class="change" id="sp500C">取得中…</div>
+
+    </div>
+
+  </div>
+
+  <div class="update" id="updated">データ取得中…</div>
+
+</section>
+
+<section>
+
+  <div class="sec-title">③ 主要ニュース一覧</div>
+
+  <div class="news">
+
+    <a href="#" onclick="return false">主要市場ニュースをここに表示</a>
+
+    <div class="time">最新情報を取得中…</div>
+
+  </div>
+
+  <div class="news">
+
+    <a href="#" onclick="return false">世界経済・金融政策ニュース</a>
+
+    <div class="time">ニュース機能準備中</div>
+
+  </div>
+
+  <div class="news">
+
+    <a href="#" onclick="return false">為替・株式・商品市場ニュース</a>
+
+    <div class="time">ニュース機能準備中</div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="sec-title">④ 主要通貨のファンダメンタルズと方向感</div>
+
+  <div class="currency">
+
+    <div class="fx"><b>USD</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>JPY</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>EUR</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>GBP</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>CHF</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>AUD</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>MXN</b><div class="signal">分析中</div></div>
+
+    <div class="fx"><b>TRY</b><div class="signal">分析中</div></div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="sec-title">⑤ シナリオ別のマーケット反応</div>
+
+  <div class="scenario">
+
+    <b>米金利上昇</b><br>
+
+    ドル高・金下落・株式市場への影響を確認
+
+  </div>
+
+  <div class="scenario">
+
+    <b>米金利低下</b><br>
+
+    ドル安・金上昇・リスク資産への影響を確認
+
+  </div>
+
+  <div class="scenario">
+
+    <b>リスクオフ</b><br>
+
+    円・ドル・金など安全資産への資金移動を確認
+
+  </div>
+
+</section>
+
+</div>
+
+<script>
+
+const assets={
+
+  brent:["UKOIL","brent","brentC"],
+
+  gold:["XAUUSD","gold","goldC"],
+
+  dxy:["DXY","dxy","dxyC"],
+
+  nikkei:["JP225","nikkei","nikkeiC"],
+
+  sp500:["US500","sp500","sp500C"]
+
+};
+
+async function getQuote(symbol){
+
+  try{
+
+    const r=await fetch(
+
+      "https://biquote.io/api/quotes/"+symbol,
+
+      {cache:"no-store"}
+
+    );
+
+    if(!r.ok) throw new Error();
+
+    return await r.json();
+
+  }catch(e){
+
+    return null;
+
+  }
+
+}
+
+function show(id,cid,q){
+
+  if(!q){
+
+    document.getElementById(id).textContent="--";
+
+    document.getElementById(cid).textContent="取得待ち";
+
+    document.getElementById(cid).className="change neutral";
+
+    return;
+
+  }
+
+  const p=q.mid ?? q.price ?? q.last;
+
+  const d=q.dayDiffPercent ?? q.changePercent;
+
+  if(p!=null)
+
+    document.getElementById(id).textContent=
+
+      Number(p).toLocaleString(undefined,{maximumFractionDigits:3});
+
+  if(d!=null){
+
+    const n=Number(d);
+
+    const el=document.getElementById(cid);
+
+    el.textContent=(n>=0?"+":"")+n.toFixed(2)+"%";
+
+    el.className="change "+(n>0?"up":n<0?"down":"neutral");
+
+  }
+
+}
+
+async function update(){
+
+  for(const key in assets){
+
+    const [symbol,id,cid]=assets[key];
+
+    const q=await getQuote(symbol);
+
+    show(id,cid,q);
+
+  }
+
+  const now=new Date();
+
+  document.getElementById("updated").textContent=
+
+    "最終更新 "+now.toLocaleTimeString("ja-JP");
+
+  document.getElementById("date").textContent=
+
+    now.toLocaleDateString("ja-JP",{
+
+      year:"numeric",month:"long",day:"numeric",weekday:"short"
+
+    });
+
+}
+
+update();
+
+setInterval(update,5000);
+
+</script>
 
 </body>
 
