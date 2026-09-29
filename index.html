@@ -6,42 +6,38 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>マーケット分析</title>
+<title>LIVE接続テスト</title>
 
 <style>
 
-*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#eaf6ff;color:#10204d;padding:20px}
 
-body{margin:0;background:#eaf6ff;color:#10204d;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,Arial,sans-serif}
+h1{color:#0757b5}
 
-.page{max-width:1400px;margin:auto;padding:10px}
+.card{background:white;border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px #ccd}
 
-.top{display:grid;grid-template-columns:1fr 260px 330px;gap:8px;align-items:stretch}
+.price{font-size:28px;font-weight:bold}
 
-.brand{padding:8px 12px 2px}
+.up{color:red}.down{color:blue}
 
-.brandline{display:flex;align-items:center;gap:10px}
+</style>
 
-.icon{font-size:55px;line-height:1;color:#1675dc;text-shadow:2px 2px #b9e4ff}
+</head>
 
-h1{margin:0;font-size:38px;letter-spacing:-1px}
+<body>
 
-.subtitle{font-size:16px;font-weight:700;margin-top:2px}
+<h1>📊 LIVE MARKET TEST</h1>
 
-.info,.conclusion{background:#fff;border:1px solid #cfe5f5;border-radius:10px;padding:9px 13px;box-shadow:0 1px 5px #cfe3ef}
+<p>5銘柄を15秒ごとに更新</p>
 
-.info{text-align:center;font-weight:700;font-size:16px}
+<div class="card">🛢️ Brent<br><span class="price" id="UKOIL">取得中...</span></div>
 
-.info b{font-size:21px}
+<div class="card">🪙 Gold<br><span class="price" id="XAUUSD">取得中...</span></div>
 
-.conclusion h3{margin:0;background:#159be8;color:#fff;border-radius:14px;padding:4px 12px;text-align:center;font-size:16px}
+<div class="card">💲 DXY<br><span class="price" id="DXY">取得中...</span></div>
 
-.conclusion p{margin:6px 0 0;font-size:13px;line-height:1.45;font-weight:700}
+<div class="card">🇯🇵 日経225<br><span class="price" id="JP225">取得中...</span></div>
 
-.sec{margin-top:6px}
-
-.sec-head{height:34px;display:flex;align-items:center;gap:8px;color:#063eaa;font-weight:900;font-size:20px}
-
-.badge{background:#0d
+<div class="card">🇺🇸
