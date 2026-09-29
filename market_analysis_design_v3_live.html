@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>マーケット分析</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eaf6ff;color:#10204d;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,Arial,sans-serif}
+.page{max-width:1400px;margin:auto;padding:10px}
+.top{display:grid;grid-template-columns:1fr 260px 330px;gap:8px;align-items:stretch}
+.brand{padding:8px 12px 2px}
+.brandline{display:flex;align-items:center;gap:10px}
+.icon{font-size:55px;line-height:1;color:#1675dc;text-shadow:2px 2px #b9e4ff}
+h1{margin:0;font-size:38px;letter-spacing:-1px}
+.subtitle{font-size:16px;font-weight:700;margin-top:2px}
+.info,.conclusion{background:#fff;border:1px solid #cfe5f5;border-radius:10px;padding:9px 13px;box-shadow:0 1px 5px #cfe3ef}
+.info{text-align:center;font-weight:700;font-size:16px}
+.info b{font-size:21px}
+.conclusion h3{margin:0;background:#159be8;color:#fff;border-radius:14px;padding:4px 12px;text-align:center;font-size:16px}
+.conclusion p{margin:6px 0 0;font-size:13px;line-height:1.45;font-weight:700}
+.sec{margin-top:6px}
+.sec-head{height:34px;display:flex;align-items:center;gap:8px;color:#063eaa;font-weight:900;font-size:20px}
+.badge{background:#0d79e5;color:#fff;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:17px}
+.grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.flow,.asset,.news,.currency,.scenario,.chart{background:#fff;border:1px solid #cfe4f2;border-radius:8px;box-shadow:0 1px 4px #cfe1eb;overflow:hidden}
+.flow{min-height:105px}
+.flow .fh{padding:4px 7px;color:#fff;font-weight:900;font-size:14px}
+.f1{background:#f0442f}.f2{background:#f07827}.f3{background:#e51d72}.f4{background:#1976d2}.f5{background:#e61f48}.f6{background:#7a22dc}
+.flow .body{padding:7px;text-align:center;font-size:12px;font-weight:700;line-height:1.35}
+.flow .emoji{font-size:29px;display:block;margin:2px}
+.assetgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.asset{padding:7px;min-height:145px}
+.asset .name{font-weight:900;font-size:13px}
+.live{float:right;background:#ff334e;color:#fff;border-radius:5px;padding:1px 4px;font-size:9px}
+.price{font-size:22px;font-weight:900;margin-top:10px}
+.up{color:#e52323}.down{color:#1566d7}
+.asset .reason{font-size:11px;line-height:1.35;margin-top:6px;font-weight:700}
+.side{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.sidebox{background:#fff;border:1px solid #cfe4f2;border-radius:8px;overflow:hidden}
+.sidebox h4{margin:0;padding:5px;color:#fff;text-align:center;font-size:14px}
+.buy h4{background:#13a870}.sell h4{background:#f51c2b}
+.sidebox p{margin:4px 8px;font-size:11px;line-height:1.45;font-weight:700}
+.newsgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.news{padding:6px}
+.tag{display:inline-block;color:#fff;border-radius:5px;padding:2px 6px;font-size:9px;font-weight:900}
+.newsimg{height:58px;border-radius:5px;margin:5px 0;background:linear-gradient(135deg,#173e6c,#7db4d8);display:flex;align-items:center;justify-content:center;font-size:28px}
+.news h4{margin:2px 0;font-size:12px;line-height:1.25}
+.news p{margin:3px 0;font-size:10px;line-height:1.3;color:#34486b}
+.cgrid{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.currency{padding:5px;text-align:center}
+.flag{font-size:20px}
+.currency b{font-size:12px}
+.currency p{margin:2px 0;font-size:10px;line-height:1.25;font-weight:700}
+.sig{border-radius:4px;padding:3px;font-weight:900;font-size:10px}.strong{background:#bdf3d3;color:#08763f}.mid{background:#fff0b5;color:#8b6900}.weak{background:#ffd1d1;color:#b10f25}
+.sgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.scenario{min-height:94px}
+.scenario h4{margin:0;padding:5px;color:#fff;text-align:center;font-size:11px;line-height:1.1}
+.scenario .sbody{padding:5px;font-size:10px;line-height:1.4;font-weight:800}
+.s1 h4{background:#ed2e36}.s2 h4{background:#1687df}.s3 h4{background:#0ba778}.s4 h4{background:#7d24df}.s5 h4{background:#7b22dd}.s6 h4{background:#f07820}.s7 h4{background:#1387df}.s8 h4{background:#751bd0}
+.chartbar{display:flex;justify-content:flex-end;gap:5px;margin-bottom:4px}
+.chartbar span{background:#fff;border:1px solid #c9dfef;border-radius:5px;padding:4px 9px;font-size:11px;font-weight:800}
+.chartgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.chart{padding:6px}
+.chart h4{margin:0 0 3px;font-size:12px}
+.chart svg{width:100%;height:82px;background:linear-gradient(#fff,#f8fcff);border-radius:4px}
+.candle{stroke:#16a05d;stroke-width:2}.red{stroke:#e52323;stroke-width:2}.wick{stroke:#333;stroke-width:1}
+.note{font-size:9px;color:#667994;text-align:right;margin-top:4px}
+@media(max-width:900px){
+ .page{padding:5px;min-width:980px}
+ body{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <div class="brand">
+      <div class="brandline"><div class="icon">↗▥</div><div><h1>マーケット分析</h1><div class="subtitle">ニュースから今が買われやすい・売られやすいを一目で把握</div></div></div>
+    </div>
+    <div class="info"><b id="today">2026/9/29（火）</b><br>☀️ 朝のマーケットレポート　<span style="color:#f22">最新</span><br><small>作成時刻 07:20（自動更新：5分ごと）</small></div>
+    <div class="conclusion"><h3>💡 今日の結論</h3><p>中東情勢の悪化により原油高・インフレ懸念が再燃。<br>米金利上昇観測が強まり、ドル高・株安・金の流れ。</p></div>
+  </div>
+
+  <section class="sec">
+    <div class="sec-head"><span class="badge">1</span>現在の流れ（因果関係）</div>
+    <div class="grid6">
+      <div class="flow"><div class="fh f1">① 中東情勢の悪化</div><div class="body"><span class="emoji">🛢️</span>米・イラン対立<br>ホルムズ海峡の緊張</div></div>
+      <div class="flow"><div class="fh f2">② 原油価格の上昇</div><div class="body"><span class="emoji">🛢️</span>Brent 100ドル台<br>WTI 93ドル台</div></div>
+      <div class="flow"><div class="fh f3">③ インフレ懸念の再燃</div><div class="body"><span class="emoji">📈</span>エネルギー価格上昇<br>上昇圧力</div></div>
+      <div class="flow"><div class="fh f4">④ 米の利上げ観測継続</div><div class="body"><span class="emoji">🏦</span>FRBの利上げ観測<br>（再上昇圧力）</div></div>
+      <div class="flow"><div class="fh f5">⑤ 米長期金利の上昇</div><div class="body"><span class="emoji">📈</span>米10年債利回り<br>4.25%近辺</div></div>
+      <div class="flow"><div class="fh f6">⑥ 市場の反応</div><div class="body"><span class="emoji">💲¥</span>ドル高・円安圧力<br>株高・株安が混在</div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="badge">2</span>主要資産の現在地と方向性 <small>（リアルタイム）</small><span style="font-size:11px;margin-left:auto">最終更新：試作データ</span></div>
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:5px">
+      <div class="assetgrid">
+        <div class="asset"><span class="live">LIVE</span><div class="name">🛢️ 原油（Brent）</div><div class="price" id="p-UKOIL">--</div><div id="c-UKOIL" class="neutral">取得中…</div><div class="reason">中東情勢・供給懸念を反映</div></div>
+        <div class="asset"><span class="live">LIVE</span><div class="name">🪙 金（Gold）</div><div class="price" id="p-XAUUSD">--</div><div id="c-XAUUSD" class="neutral">取得中…</div><div class="reason">米金利・ドルとの関係を反映</div></div>
+        <div class="asset"><span class="live" style="background:#778" data-us10y-badge>SOURCE</span><div class="name">🇺🇸 米10年債利回り</div><div class="price" id="p-US10Y">--</div><div id="c-US10Y" class="neutral">取得中…</div><div class="reason">米10年債利回りを別系統で取得</div></div>
+        <div class="asset"><span class="live">LIVE</span><div class="name">💲 米ドル指数（DXY）</div><div class="price" id="p-DXY">--</div><div id="c-DXY" class="neutral">取得中…</div><div class="reason">金利・リスク回避を反映</div></div>
+        <div class="asset"><span class="live">LIVE</span><div class="name">🇯🇵 日経平均</div><div class="price" id="p-JP225">--</div><div id="c-JP225" class="neutral">取得中…</div><div class="reason">日本株指数CFDの現在値を反映</div></div>
+        <div class="asset"><span class="live">LIVE</span><div class="name">🇺🇸 S&amp;P500</div><div class="price" id="p-US500">--</div><div id="c-US500" class="neutral">取得中…</div><div class="reason">米株指数CFDの現在値を反映</div></div>
+      </div>
+      <div class="side">
+        <div class="sidebox buy"><h4>↑ 現在 買われやすい資産</h4><p>🛢️ 原油　↑ 中東情勢・供給懸念</p><p>💲 米ドル　↑ 米金利上昇</p><p>🇨🇦 カナダドル　↑ 原油高・資源国</p><p>🏦 短期米国債　↑ 金利上昇</p><p>⚡ エネルギー関連株　↑ 原油高</p><p>🛡️ 安全資産　↑ 地政学リスク</p></div>
+        <div class="sidebox sell"><h4>↓ 現在 売られやすい資産</h4><p>🪙 金　↓ 実質金利上昇・ドル高</p><p>🏦 長期国債　↓ インフレ・金利上昇</p><p>📊 グロース株　↓ 金利上昇</p><p>🌍 新興国通貨　↓ リスクオフ</p><p>🏢 不動産（REIT）↓ 金利上昇</p><p>₿ 暗号資産　↓ リスク回避</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="badge">3</span>主要ニュース一覧 <small>市場に大きな影響を与える最新ニュース（タップで詳細記事を表示）</small></div>
+    <div class="newsgrid">
+      <div class="news"><span class="tag" style="background:#d51d35">地政学</span><div class="newsimg">🚢</div><h4>イランがホルムズ海峡で軍事演習を開始</h4><p>原油価格が一時2%上昇。供給懸念から地政学リスクが再燃。</p></div>
+      <div class="news"><span class="tag" style="background:#2474d7">金融政策</span><div class="newsimg">🏦</div><h4>FRB高官が利上げ継続の可能性を示唆</h4><p>インフレは依然高く、追加利上げも選択肢との発言。</p></div>
+      <div class="news"><span class="tag" style="background:#ef3030">経済指標</span><div class="newsimg">🇺🇸</div><h4>米PCEデフレーターが市場予想を上回る</h4><p>インフレの粘着性が確認され、米長期金利が一段と上昇。</p></div>
+      <div class="news"><span class="tag" style="background:#ef7b18">市況</span><div class="newsimg">🏛️</div><h4>米国株が続落 S&amp;P500は1.4%安</h4><p>ハイテク株を中心に売りが広がり、利下げ観測が後退。</p></div>
+      <div class="news"><span class="tag" style="background:#6421d2">為替</span><div class="newsimg">💴</div><h4>ドル円が148円台に上昇</h4><p>米金利上昇と日米金利差拡大でドル買い・円売りが優勢。</p></div>
+      <div class="news"><span class="tag" style="background:#1482a7">コモディティ</span><div class="newsimg">🥇</div><h4>金価格が2,350ドル台を回復</h4><p>地政学リスクとインフレ懸念で安全資産の買いが再び強まる。</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="badge">3</span>主要通貨のファンダメンタルズと方向感</div>
+    <div class="cgrid">
+      <div class="currency"><div class="flag">🇺🇸</div><b>USD</b><p>金利上昇<br>ドル買い圧力</p><div class="sig strong">強い</div></div>
+      <div class="currency"><div class="flag">🇯🇵</div><b>JPY</b><p>安全資産<br>円高圧力</p><div class="sig mid">やや強い</div></div>
+      <div class="currency"><div class="flag">🇪🇺</div><b>EUR</b><p>ECB利下げ<br>ユーロ安圧力</p><div class="sig mid">やや弱い</div></div>
+      <div class="currency"><div class="flag">🇬🇧</div><b>GBP</b><p>成長鈍化<br>ポンド安圧力</p><div class="sig mid">やや弱い</div></div>
+      <div class="currency"><div class="flag">🇦🇺</div><b>AUD</b><p>資源高<br>豪ドル買い</p><div class="sig mid">やや強い</div></div>
+      <div class="currency"><div class="flag">🇳🇿</div><b>NZD</b><p>景気不安<br>リスクオフ</p><div class="sig weak">弱い</div></div>
+      <div class="currency"><div class="flag">🇨🇦</div><b>CAD</b><p>原油高<br>カナダドル買い</p><div class="sig strong">強い</div></div>
+      <div class="currency"><div class="flag">🇨🇭</div><b>CHF</b><p>スイスフラン<br>安全通貨</p><div class="sig mid">やや強い</div></div>
+      <div class="currency"><div class="flag">🇲🇽</div><b>MXN</b><p>政策金利高<br>資源国通貨</p><div class="sig mid">やや強い</div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="badge">4</span>シナリオ別のマーケット反応</div>
+    <div class="sgrid">
+      <div class="scenario s1"><h4>① インフレ加速<br><small>（原油高・供給ショック）</small></h4><div class="sbody">原油 ↑↑　米ドル ↑↑　株式 ↓↓　金 ↑</div></div>
+      <div class="scenario s2"><h4>② 米利上げ継続<br><small>（タカ派長期化）</small></h4><div class="sbody">米ドル ↑　金 ↓↓　債券 ↓↓　株式 ↓</div></div>
+      <div class="scenario s3"><h4>③ 利下げ開始<br><small>（景気悪化シナリオ）</small></h4><div class="sbody">株式 ↑↑　金 ↑　債券 ↑↑　円 ↑</div></div>
+      <div class="scenario s4"><h4>④ 景気拡大<br><small>（リスクオン相場）</small></h4><div class="sbody">株式 ↑↑　原油 ↑　米ドル ↓　円 ↓</div></div>
+      <div class="scenario s5"><h4>⑤ 地政学リスク拡大<br><small>（中東・ウクライナ）</small></h4><div class="sbody">金 ↑↑　原油 ↑↑　債券 ↑　株式 ↓</div></div>
+      <div class="scenario s6"><h4>⑥ スタグフレーション<br><small>（成長鈍化＋インフレ）</small></h4><div class="sbody">原油 ↑　金 ↑↑　債券 ↓↓　株式 ↓↓</div></div>
+      <div class="scenario s7"><h4>⑦ 地政学リスク緩和<br><small>（リスクオフ後の反動）</small></h4><div class="sbody">株式 ↑↑　原油 ↓　円 ↓　金 ↓</div></div>
+      <div class="scenario s8"><h4>⑧ リスクオン<br><small>（グローバル景気）</small></h4><div class="sbody">原油 ↑　株式 ↑↑　米ドル ↓　金 ↓</div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="badge">5</span>主要チャート（確認用）</div>
+    <div class="chartbar"><span>日足</span><span>週足</span><span>月足</span><span>● ローソク足</span><span>↗ チャートを拡大</span></div>
+    <div class="chartgrid" id="charts"></div>
+    <div class="note">※主要5資産は実データ接続テスト中。チャートは次工程で実データ化。</div>
+  </section>
+</div>
+<script>
+const symbols=["UKOIL","XAUUSD","DXY","JP225","US500"];
+
+function fmtPrice(v,s){
+  if(v==null||Number.isNaN(Number(v))) return "--";
+  const n=Number(v);
+  if(s==="JP225"||s==="US500") return n.toLocaleString("ja-JP",{maximumFractionDigits:0});
+  return n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function showTick(t){
+  if(!t||!t.symbol)return false;
+  const p=document.getElementById("p-"+t.symbol);
+  const c=document.getElementById("c-"+t.symbol);
+  if(!p||!c)return false;
+  const price=t.mid ?? t.price ?? t.lastPrice ?? t.last;
+  if(price==null)return false;
+  p.textContent=fmtPrice(price,t.symbol);
+  const d=Number(t.dayDiffPercent ?? t.changePercent);
+  if(Number.isFinite(d)){
+    c.textContent=(d>=0?"▲ +":"▼ ")+Math.abs(d).toFixed(2)+"%";
+    c.className=d>=0?"up":"down";
+  }else{
+    c.textContent=t.marketState==="closed"?"市場休場・最終値":"変化率なし";
+    c.className="neutral";
+  }
+  const age=Number(t.quoteAgeSeconds);
+  if(Number.isFinite(age) && age>300) c.textContent += "（"+Math.floor(age/60)+"分前）";
+  return true;
+}
+function normalizeBatch(data){
+  if(Array.isArray(data)) return data;
+  if(Array.isArray(data?.items)) return data.items;
+  if(Array.isArray(data?.quotes)) return data.quotes;
+  if(data && typeof data==='object'){
+    const vals=Object.values(data).filter(v=>v && typeof v==='object' && (v.symbol||v.mid!=null));
+    if(vals.length) return vals;
+  }
+  return [];
+}
+async function fetchOne(s){
+  const r=await fetch("https://biquote.io/api/"+encodeURIComponent(s)+"?allowStale=true",{cache:"no-store"});
+  if(!r.ok) throw new Error(s+" HTTP "+r.status);
+  return await r.json();
+}
+async function updateLive(){
+  let okCount=0;
+  try{
+    const qs=symbols.map(s=>"symbols="+encodeURIComponent(s)).join("&");
+    const r=await fetch("https://biquote.io/api/latest?"+qs,{cache:"no-store"});
+    if(r.ok){
+      const raw=await r.json();
+      const list=normalizeBatch(raw);
+      list.forEach(t=>{ if(showTick(t)) okCount++; });
+    }
+  }catch(e){ console.log("batch failed",e); }
+
+  // バッチ形式が変わっていても、各銘柄を個別取得して救済する
+  if(okCount<symbols.length){
+    await Promise.all(symbols.map(async s=>{
+      const el=document.getElementById("p-"+s);
+      if(el && el.textContent!=="--") return;
+      try{ const t=await fetchOne(s); showTick(t); }catch(e){
+        const c=document.getElementById("c-"+s);
+        if(c){c.textContent="接続確認中";c.className="neutral";}
+      }
+    }));
+  }
+  const stamp=new Date().toLocaleTimeString("ja-JP");
+  const small=document.querySelector(".sec-head small");
+  if(small) small.textContent="最終更新："+stamp;
+}
+
+// 米10年債：Yahoo Finance の ^TNX を補助取得。取得できない場合は明示表示。
+async function updateUS10Y(){
+  const p=document.getElementById("p-US10Y"), c=document.getElementById("c-US10Y");
+  if(!p||!c)return;
+  try{
+    const r=await fetch("https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1m&range=1d",{cache:"no-store"});
+    if(!r.ok) throw new Error("Yahoo HTTP "+r.status);
+    const j=await r.json();
+    const res=j?.chart?.result?.[0];
+    const q=res?.indicators?.quote?.[0];
+    const closes=(q?.close||[]).filter(v=>typeof v==='number');
+    if(!closes.length) throw new Error("no quote");
+    const last=closes[closes.length-1];
+    const prev=closes.find(v=>typeof v==='number');
+    p.textContent=Number(last).toFixed(3)+"%";
+    const meta=res?.meta;
+    const prevClose=Number(meta?.previousClose);
+    if(Number.isFinite(prevClose)){
+      const diff=last-prevClose;
+      c.textContent=(diff>=0?"▲ +":"▼ ")+Math.abs(diff).toFixed(3);
+      c.className=diff>=0?"up":"down";
+    }else{ c.textContent="取得済み"; c.className="neutral"; }
+    const badge=document.querySelector('[data-us10y-badge]');
+    if(badge) badge.textContent="LIVE";
+  }catch(e){
+    p.textContent="--";
+    c.textContent="接続確認中";
+    c.className="neutral";
+  }
+}
+
+document.getElementById('today').textContent=new Date().toLocaleDateString('ja-JP',{year:'numeric',month:'numeric',day:'numeric',weekday:'short'});
+updateLive();
+updateUS10Y();
+setInterval(updateLive,15000);
+setInterval(updateUS10Y,30000);
+
+const names=[
+['🛢️ 原油（Brent）','98.74','+2.13%'],['🪙 金（Gold）','2,347.20','+0.86%'],
+['🇺🇸 米10年債利回り','4.259%','+0.032'],['🇬🇧 米ドル指数（DXY）','106.82','+0.68%'],
+['🇯🇵 日経平均','31,856','-1.18%'],['🇺🇸 S&P500','5,421','-1.42%'],
+['🇺🇸 USD/JPY','148.23','+0.52%'],['🇪🇺 EUR/USD','1.0743','-0.31%'],
+['🇬🇧 GBP/USD','1.2698','-0.28%'],['🇦🇺 AUD/USD','0.6701','-0.15%']
+];
+function chartSVG(seed){
+ let x=8, base=54, out='<svg viewBox="0 0 250 82" preserveAspectRatio="none"><path d="M0 68H250M0 40H250" stroke="#d9e5ef" stroke-width="1"/>';
+ for(let i=0;i<32;i++){let y=base-Math.sin((i+seed)*.55)*13-(i*.32);let open=y+(i%3-1)*3;let close=y+(i%4-2)*2;let hi=Math.min(open,close)-4;let lo=Math.max(open,close)+4;let up=close<open;out+=`<line x1="${x}" y1="${hi}" x2="${x}" y2="${lo}" class="wick"/><line x1="${x}" y1="${open}" x2="${x}" y2="${close}" class="${up?'red':'candle'}"/>`;x+=7.7}
+ return out+'</svg>';
+}
+document.getElementById('charts').innerHTML=names.map((n,i)=>`<div class="chart"><h4>${n[0]} <span style="float:right;color:${n[2][0]=='-'?'#1467d8':'#e52323'}">${n[1]}　${n[2]}</span></h4>${chartSVG(i)}</div>`).join('');
+</script>
+</body>
+</html>
