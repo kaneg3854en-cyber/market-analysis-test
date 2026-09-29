@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html>
 
 <head>
 
@@ -8,34 +8,40 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>LIVE MARKET TEST</title>
+<title>LIVE TEST</title>
 
 <style>
 
-body{
+body{background:#07111f;color:white;font-family:sans-serif;text-align:center;padding:40px}
 
-  margin:0;
+.box{padding:30px;border:2px solid #39a9ff;border-radius:20px}
 
-  padding:25px;
+#price{font-size:50px;font-weight:bold;margin:25px}
 
-  background:#07111f;
+#change{font-size:25px}
 
-  color:#fff;
+</style>
 
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+</head>
 
-}
+<body>
 
-h1{
+<div class="box">
 
-  text-align:center;
+<h1>🛢️ 原油 Brent</h1>
 
-  color:#42b5ff;
+<div id="price">取得中…</div>
 
-  margin:10px 0 5px;
+<div id="change">--</div>
 
-}
+<p id="status">接続中…</p>
 
-.sub{
+</div>
 
-  text-align:
+<script>
+
+async function test(){
+
+try{
+
+const r=await fetch("http
